@@ -1,0 +1,154 @@
+0.查看git所在远程库的地址
+$ git remote -v
+origin  http://10.0.128.104:9001/healthdata/health-script.git (fetch)
+origin  http://10.0.128.104:9001/healthdata/health-script.git (push)
+
+查看所有分支：
+manyansong@SHPC0A5KX5-L MINGW64 /e/ideaWorkspace/health-script (develop)
+$ git branch -va
+* develop                   9290730 添加分时排班，注释同步TFS，在1.1.7版本同步
+  remotes/origin/HEAD       -> origin/develop
+  remotes/origin/develop    9290730 添加分时排班，注释同步TFS，在1.1.7版本同步
+  remotes/origin/develop_01 7dcf958 对应平台1.1.7版本
+  remotes/origin/master     cfcabb5 repo init
+  
+当前是develop分支下，如果要切换到develop_01则
+manyansong@SHPC0A5KX5-L MINGW64 /e/ideaWorkspace/health-script (develop)
+$ git checkout develop_01
+Branch develop_01 set up to track remote branch develop_01 from origin.
+Switched to a new branch 'develop_01'
+
+
+
+1、在https://github.com/上注册一个账户
+用户名：yansong8686 密码通用
+2、设置远程库名称（repository name）: performer
+这样远程库url为：https://github.com/yansong8686/performer.git
+3、指定本地路径，执行git clone <中央仓库地址>  <本地代码目录>
+git clone https://github.com/yansong8686/performer.git
+这样就将远程库里的东西都下载到本地路径了。
+4、指定提交时的用户名和邮箱
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+
+git config --list 查看配置列表
+5、创建一个测试文件并执行一个完整的提交流程
+a).touch test.txt
+vim 修改 wq报存退出
+b).git status
+这racked files(表示文件处于工作区<.git所在的目录中>，而且是无路径的状态)以及 红色的文件名
+c).git add 将修改过的文件添加到暂存区（.git中的index）
+git add . 将当前文件夹下的所有文件添加到暂存区 【注】：.代表当前目录；添加多个文件，文件名中间用空格;
+这时能看到 绿色文件名
+d).撤回已经add的文件
+git rm --cached 文件名
+e).git commit -m '注释' 将暂存区的文件提交的本地库（.git中的HEAD）
+f).git push origin master 将本地库的文件提交到远程库
+其中master代表分支名，在当前命令行上方一行最后括号中有显示，也可以把 master 换成你想要推送的任何分支；
+origin为默认远程仓库的别名，可直接使用
+6、git pull:
+同步中央仓库的内容到本地git库中,并将远程分支中的内容与本地工作区跟踪分支做合并，即git fetch + git merge
+
+如果是已经clone过的工程，在每次执行一个完整流程前，需要先执行git pull,然后再执行
+c，e, f
+
+7.git pull造成的冲突：
+git pull后需注意屏幕输出，看返回信息中是否有冲突文件，有冲突需要先解决冲突；
+冲突提示标志：
+当执行merge 或者 pull时，返回信息中提示类似如下：
+"
+CONFLICT (add/add): Merge conflict in test.txt.txt
+Automatic merge failed; fix conflicts and then commit the result.
+"
+遇到如上提示，需要先处理冲突文件，打开提示冲突的文件，上例中为“test.txt.txt”
+“ <<<<<<< HEAD
+2015test  （自己本地的）
+=======
+2015test-01  （远程库的）
+>>>>>>> 1aa8fc47d35a4db8ab74c41a734423770467733b ”
+如上蓝色字体为冲突标志，将整个文本内容分为两段，此两段即为文件中冲突的内容；
+“<<<<<<< HEAD” 到“=======”之间的内容表明当前本机文件中的内容；
+“=======” 到“>>>>>>> 1aa8fc47d35a4db8ab74c41a734423770467733b” 之间的内容表明服务端同步下来的某commit提交的内容；
+选择两段中正确的代码，然后去掉所有冲突标志，文件即被处理完成。（注：每个冲突文件中可能不止一处冲突，需要处理完所有的冲突段落）
+然后执行如下命令：
+git add  <有冲突的文件名> ；
+git commit
+如此整个冲突过程处理完成。
+
+8.git checkout -- 文件名
+如果将本地代码提交到远程后，误删除了本地已提交的代码或者不想保存修改的文件，想要恢复，则可以用此命令。
+比如误删除了本地文件 a.txt
+manyansong@SHPC0A5KX5-L MINGW64 /d/gitTest/performer (master)
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    a.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+manyansong@SHPC0A5KX5-L MINGW64 /d/gitTest/performer (master)
+$ git pull
+Already up-to-date.
+
+manyansong@SHPC0A5KX5-L MINGW64 /d/gitTest/performer (master)
+$ git checkout -- a.txt
+
+manyansong@SHPC0A5KX5-L MINGW64 /d/gitTest/performer (master)
+$ ll
+total 2
+-rw-r--r-- 1 manyansong Domain Users  4 七月 15 08:27 a.txt
+-rw-r--r-- 1 manyansong Domain Users 52 七月 14 09:38 test.txt
+
+9.git reset HEAD 文件名
+如果已经执行完 git add的文件，可以执行git reset HEAD 文件名，来撤回
+
+10.git stash 和 git stash pop
+如果当前工作空间上存在修改或新增的文件，待执行git add 或 git checkout -- <file>命令，这时，如果想pull下远程库的代码，就会报如下问题：
+Unlink of file '.git/objects/pack/pack-03bdfa31b29ac3ad2858fd762137d52208d28258.idx' failed. Should I try again? (y/n) n
+....
+这样就需要执行
+git add 和 git commit 确保是
+nothing to commit, working directory clean
+
+git stash 暂存， 然后在执行 git pull
+可以pull下来，最后再还原暂存的文件，执行git stash pop
+
+11.问题解决：Unlink of file '.git/objects/pack/pack-***.pack' failed. Should I try again? (y/n) y
+Git pull的时候遇到
+
+Unlink of file '.git/objects/pack/pack-***.pack' failed. Should I try again? (y/n) y
+1
+1
+于是一直输“y”就一直出现这样，查了下有人说那个文件重复了，删除即可（没试过）。也有说是因为文件被占用了，重启了编程软件输入以下代码解决了问题（也是查来的）：
+
+git gc --auto
+git repack -d -l
+1
+2
+1
+2
+git gc –auto这个代码百度谷歌都没查到，但是基于git gc的作用可以理解为git gc –auto是自动清理了本地的文件。 
+另外如果是真的文件被占用了，重新启一下explorer.exe、重启电脑、注销电脑应该都是可以解决这个问题的。
+
+转载请注明原址：http://blog.csdn.net/zheng911209/article/details/47147483
+
+12.eclipse 同步发现冲突，远程库代码pull失败，但是本地又有修改的文件不想提交，
+a.执行 git stash ,再执行git status 发现nothing to commit, working directory clean
+b.这样就可以使用 git pull 把远程库代码成功pull了
+c.再执行 git stash pop 会发现有有些文件有冲突了，有些自动合并了：
+Auto-merging plaza-script/src/test/java/com/pajk/plaza/gzhq/TestScript.java
+CONFLICT (content): Merge conflict in plaza-script/src/test/java/com/pajk/plaza/gzhq/TestScript.java
+Auto-merging plaza-script/src/main/java/com/pajk/plaza/gzhq/GetScheduleCallback.java
+解决冲突文件TestScript.java
+
+13.本地新增的测试文件，不想提交，但是远程代码pull失败
+a.执行git add .将所有测试文件添加到暂存区
+b.执行git stash 
+c.git status 发现nothing to commit, working directory clean  这样就可以git pull下来了
+d.最后再执行 git stash pop恢复stash,git reset HEAD .完全还原
+
+14.git pull --rebase origin develop 拉代码
