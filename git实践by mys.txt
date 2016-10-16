@@ -23,7 +23,7 @@ Switched to a new branch 'develop_01'
 1、在https://github.com/上注册一个账户
 用户名：yansong8686 密码通用
 2、设置远程库名称（repository name）: performer
-这样远程库url为：https://github.com/yansong8686/performer.git
+这样远程库url为：https://github.com/yansong8686/performer.git   
 3、指定本地路径，执行git clone <中央仓库地址>  <本地代码目录>
 git clone https://github.com/yansong8686/performer.git
 这样就将远程库里的东西都下载到本地路径了。
