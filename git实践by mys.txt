@@ -28,8 +28,8 @@ Switched to a new branch 'develop_01'
 git clone https://github.com/yansong8686/performer.git
 这样就将远程库里的东西都下载到本地路径了。
 4、指定提交时的用户名和邮箱
-git config --global user.name "Your Name"
-git config --global user.email you@example.com
+git config --global user.name "Your Name" （同用户名）
+git config --global user.email you@example.com （QQ）
 
 git config --list 查看配置列表
 5、创建一个测试文件并执行一个完整的提交流程
