@@ -3,7 +3,6 @@ $ git remote -v
 origin  http://10.0.128.104:9001/healthdata/health-script.git (fetch)
 origin  http://10.0.128.104:9001/healthdata/health-script.git (push)
 
-
 查看所有分支：
 manyansong@SHPC0A5KX5-L MINGW64 /e/ideaWorkspace/health-script (develop)
 $ git branch -va
