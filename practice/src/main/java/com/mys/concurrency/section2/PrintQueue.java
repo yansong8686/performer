@@ -9,7 +9,8 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class PrintQueue {
     private final Lock lock = new ReentrantLock();//声明可重入锁
-    public void printJob1(Object document){
+    public void printJob(Object document){
+//        Lock lock = new ReentrantLock();
         lock.lock();//获取对锁对象的控制
 
         try {
@@ -38,7 +39,7 @@ public class PrintQueue {
                 lock.unlock();//一定要释放，否则会死锁
             }
         }else {
-            //如果lock是局部变量，就不会走到else语句体
+            //如果lock是局部变量（每个线程是一把锁因此不会有公共的资源需要抢占），就不会走到else语句体
             System.out.println(Thread.currentThread().getName()+"没有获取到锁，生气不打印啦。。。");
         }
 
@@ -83,7 +84,7 @@ public class PrintQueue {
                     lock.unlock();
                 }
             }else {
-                //如果lock是局部变量，就不会走到else语句体
+                //如果lock是局部变量（每个线程是一把锁因此不会有公共的资源需要抢占），就不会走到else语句体
                 System.out.println("都等了5秒了，还没有获取到锁，生气不打印啦。。。");
             }
         }catch (InterruptedException ee){//当前线程被中断时(interrupt)，会抛InterruptedExceptio
@@ -91,7 +92,7 @@ public class PrintQueue {
         }
     }
 
-    public void printJob(Object document){
+    public void printJob5(Object document){
 
         //公平情况下，操作会排一个队按顺序执行，来保证执行顺序。
         //不公平情况下，是无序状态允许插队，jvm会自动计算如何处理更快速来调度插队，性能更高。
