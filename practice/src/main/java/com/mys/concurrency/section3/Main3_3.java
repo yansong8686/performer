@@ -1,7 +1,7 @@
 package com.mys.concurrency.section3;
 
 /**
- * 最开始调用acquire（）的3个线程将获得对临界区的访问，
+ * 最开始调用acquire（）的3个线程将获得对临界区(3台打印机)的访问，
  * 其余线程被阻塞。
  * 当一个线程完成了对临界区的访问并释放了信号量，另一个线程将获得这个信号量
  * Created by ASUS on 2016/11/3.

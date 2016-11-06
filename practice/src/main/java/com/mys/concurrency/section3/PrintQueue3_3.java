@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 使用信号量保护一个资源的多个副本
  * 或者被多个线程同时执行的临界区
  * Created by Jerry on 2016/11/3.
+ *
  */
 public class PrintQueue3_3 {
     private boolean freePrinters[];
