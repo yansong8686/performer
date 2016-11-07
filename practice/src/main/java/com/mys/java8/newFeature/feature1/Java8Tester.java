@@ -1,4 +1,4 @@
-package com.mys;
+package com.mys.java8.newFeature.feature1;
 
 /**Lambda表达式特点
  * 1.主要用来定义行内执行的方法类型接口，例如，一个简单方法接口。在上面例子中，我们使用各种类型的Lambda表达式来定义MathOperation接口的方法。然后我们定义了sayMessage的执行。

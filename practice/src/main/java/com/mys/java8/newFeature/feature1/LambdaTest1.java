@@ -1,4 +1,4 @@
-package com.mys;
+package com.mys.java8.newFeature.feature1;
 
 import java.util.ArrayList;
 import java.util.Collections;
