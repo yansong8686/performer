@@ -1,5 +1,6 @@
 package com.mys.java8.newFeature.feature2;
 
+import java.text.DateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,7 +19,7 @@ import java.time.format.DateTimeParseException;
  * 新的java.time包涵盖了所有处理日期，时间，日期/时间，时区，时刻（instants），过程（during）与时钟（clock）的操作
  * Created by manyansong on 2016/11/7.
  */
-public class NewTimeTest {
+public class NewDateTimeTest {
     public static void main(String[] args) {
         testLocalDateTime();
     }
@@ -87,6 +88,7 @@ public class NewTimeTest {
 
         //g.如何在Java 8中对日期进行格式化，转换成字符串
         LocalDateTime arrivalDate = LocalDateTime.now();
+        System.out.println(arrivalDate);
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String landing = arrivalDate.format(format);
