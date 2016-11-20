@@ -1,6 +1,7 @@
 package com.mys.concurrency.section2;
 
 /**
+ * ReentranteLock示例
  * Created by ASUS on 2016/10/27.
  */
 public class Main2_5 {

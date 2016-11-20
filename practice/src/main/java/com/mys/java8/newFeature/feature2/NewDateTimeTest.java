@@ -98,6 +98,14 @@ public class NewDateTimeTest {
             ex.printStackTrace();
         }
 
+        LocalDate endofCentury = LocalDate.of(2016, 11, 14);
+        LocalDate now = LocalDate.now();
+
+        Period diff = Period.between(endofCentury, now);
+
+        System.out.printf("The 21st century (up to %s) is %s old%n", now, diff);
+        System.out.printf("The 21st century is %d years, %d months and %d days old\n",
+                diff.getYears(), diff.getMonths(), diff.getDays());
 
         //获取当前的年月日
         Month month = currentDateAndTime.getMonth();
@@ -121,6 +129,11 @@ public class NewDateTimeTest {
         // 解析字符串
         LocalTime date5 = LocalTime.parse("20:15:30");
         System.out.println("date5: " + date5);
+
+        LocalTime begin = LocalTime.parse("13:45");
+        LocalTime end = LocalTime.parse("13:47");
+        System.out.println("begin="+begin.getNano());
+        System.out.println("begin="+begin.getMinute());
 
         //Clock可以替代System.currentTimeMillis()和TimeZone.getDefault()。
         final Clock clock = Clock.systemUTC();
