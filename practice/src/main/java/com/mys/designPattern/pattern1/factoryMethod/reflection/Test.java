@@ -1,6 +1,7 @@
 package com.mys.designPattern.pattern1.factoryMethod.reflection;
 
 /**
+ * 通过反射实现 工厂方法模式
  * Created by manyansong on 2016/11/21.
  */
 public class Test {

@@ -7,9 +7,12 @@ import java.util.Random;
 /**
  * 工厂类
  * 通过反射机制，动态创建对象
+ * 工厂方法模式还有一个非常重要的应用，就是延迟始化(Lazy initialization)（类似lazy loaded延迟加载），什么是延迟始化呢？
+ * 一个对象初始化完毕后就不释放，等到再次用到得就不用再次初始化了，直接从内存过中拿到就可以了
  * Created by manyansong on 2016/11/21.
  */
 public class HumanFactory {
+    //定义一个MAP,初始化过的Human对象都放在这里，延迟初始化
     private static HashMap<String,Human> humans = new HashMap<String,Human>();
     public static Human createHuman(Class c){
         Human human=null; //定义一个类型的人类
