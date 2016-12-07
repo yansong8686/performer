@@ -6,6 +6,7 @@ import com.mys.designPattern.pattern2.abstractFactory.reflection.factory.abstrac
 import com.mys.designPattern.pattern2.abstractFactory.reflection.factory.abstractClass.impl.MaleHumanFactory;
 
 /**
+ * 反射+抽象工厂+抽象类
  * 建立起了两条生产线，分别是：男性生产线、女性生产线
  * Created by manyansong on 2016/12/5.
  */
