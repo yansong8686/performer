@@ -23,7 +23,9 @@ public class ConcreteBuilder implements Builder{
         product.setPart2("名称：XXX");
     }
     /**
-     * 产品返还方法
+     * 返回最后组装成品结果 (返回最后装配好的汽车)
+     * 成品的组装过程不在这里进行,而是转移到下面的Director类中进行.
+     * 从而实现了解耦过程和部件
      */
     @Override
     public Product retrieveResult() {
